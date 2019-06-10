@@ -97,6 +97,8 @@ class User
     :special_picture_ids, :uuid, :friends, :friend_ids, :special_tags, :special_tag_ids,
     :citext, :hstore, :json, :jsonb, :hourly, :favorite_color
 
+  alias_attribute :user_name, :name
+
   def self.build(extra_attributes = {})
     attributes = {
       id: 1,
@@ -149,6 +151,12 @@ class User
       else attribute.to_sym
     end
     Column.new(attribute, column_type, limit)
+  end
+
+  def attribute_aliases
+    {
+      "user_name" => "name"
+    }
   end
 
   begin

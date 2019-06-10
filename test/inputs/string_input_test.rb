@@ -23,6 +23,11 @@ class StringInputTest < ActionView::TestCase
     assert_select 'input.string[maxlength="100"]'
   end
 
+  test 'input gets correct information for alias_attributes' do
+    with_input_for @user, :user_name, :string
+    assert_select 'input.string[maxlength="100"]'
+  end
+
   test 'input does not get maxlength from column without size definition for string attributes' do
     with_input_for @user, :action, :string
     assert_no_select 'input.string[maxlength]'

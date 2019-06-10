@@ -582,6 +582,8 @@ module SimpleForm
         @object.type_for_attribute(attribute_name.to_s)
       elsif @object.respond_to?(:column_for_attribute) && @object.has_attribute?(attribute_name)
         @object.column_for_attribute(attribute_name)
+      elsif @object.respond_to?(:attribute_aliases) && @object.attribute_aliases[attribute_name.to_s]
+        find_attribute_column(@object.attribute_aliases[attribute_name.to_s])
       end
     end
 
